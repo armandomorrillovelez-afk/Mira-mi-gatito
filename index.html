@@ -1,47 +1,281 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#100b2e">
 <title>¿Quieres salir conmigo? 💗</title>
 <style>
-*{box-sizing:border-box}
-body{margin:0;min-height:100vh;padding:18px;display:grid;place-items:center;background:radial-gradient(ellipse at top,#302064,#09071a 70%);font-family:system-ui,sans-serif;color:#fff8ff}
-.card{width:min(100%,470px);padding:26px 20px;border:1px solid #7962b7;border-radius:26px;background:#171235;box-shadow:0 0 35px #a34cff44;text-align:center}
-.tag{font-size:11px;letter-spacing:2.5px;color:#5df6ff;font-weight:800}
-.art{font-size:68px;margin:18px}
-h1{font-size:36px;line-height:1.1}h1 span{color:#ff69c9}
-p{font-size:15px;line-height:1.65;color:#e4ddff}
-button{width:100%;padding:15px;border:0;border-radius:30px;background:linear-gradient(90deg,#5df6ff,#ff9cde);font-weight:bold;font-size:16px;margin-top:12px;color:#180b2a}
-.no{background:#ffffff12;border:1px solid #71619e;color:white}
-.item{text-align:left;border:1px solid #5a4a92;border-radius:14px;padding:14px;margin:10px 0;background:#ffffff08}
-.label{font-size:10px;letter-spacing:2px;color:#5df6ff;font-weight:bold}.value{margin-top:4px;font-weight:650}
-.hidden{display:none}footer{margin-top:20px;color:#c5b6ec;font-size:12px}
+:root {
+  --bg: #09071a;
+  --cyan: #5df6ff;
+  --pink: #ff69c9;
+  --white: #fff8ff;
+  --muted: #ded7f7;
+  --line: #5e4e96;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  padding: 18px 12px;
+  display: grid;
+  place-items: center;
+  background: radial-gradient(ellipse at 15% 5%, #272060 0, transparent 42%),
+              radial-gradient(ellipse at 90% 80%, #501548 0, transparent 38%),
+              var(--bg);
+  font-family: system-ui, -apple-system, sans-serif;
+  color: var(--white);
+}
+.card {
+  width: min(100%, 480px);
+  padding: 25px 20px 22px;
+  border: 1px solid #7962b7;
+  border-radius: 27px;
+  background: linear-gradient(145deg, #241c4f, #100a27);
+  box-shadow: 0 0 35px #5b36a644;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.card:before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 4px;
+  background: linear-gradient(90deg, var(--cyan), var(--pink), #a68bff);
+}
+.tag {
+  font-size: 10px;
+  letter-spacing: 2.2px;
+  color: var(--cyan);
+  font-weight: 850;
+  margin: 3px 0 14px;
+}
+.art { font-size: 65px; line-height: 1.25; margin: 10px 0 14px; }
+h1 { font-size: clamp(30px, 8vw, 39px); line-height: 1.08; margin: 8px 0 13px; }
+h1 span { color: var(--pink); }
+p { font-size: 14px; line-height: 1.65; color: var(--muted); }
+.buttons { display: grid; gap: 10px; margin: 20px 0 5px; }
+button {
+  font-family: inherit;
+  border: 0;
+  border-radius: 999px;
+  padding: 14px 16px;
+  font-size: 15px;
+  font-weight: 800;
+  cursor: pointer;
+}
+.primary {
+  color: #180b2a;
+  background: linear-gradient(90deg, var(--cyan), #b9faff 48%, #ff9cde);
+  box-shadow: 0 0 20px #5df6ff25;
+  width: 100%;
+}
+.secondary {
+  color: white;
+  background: #ffffff0b;
+  border: 1px solid #71619e;
+  width: 100%;
+}
+.progress {
+  height: 8px;
+  background: #ffffff18;
+  border-radius: 20px;
+  overflow: hidden;
+  margin: 16px 0 8px;
+}
+.progress span {
+  display: block;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, var(--cyan), var(--pink));
+}
+.details { display: grid; gap: 10px; margin: 20px 0; text-align: left; }
+.item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: #ffffff08;
+}
+.emoji { font-size: 23px; width: 32px; text-align: center; }
+.label { font-size: 10px; letter-spacing: 1.6px; color: var(--cyan); font-weight: 850; }
+.value { font-size: 14px; font-weight: 650; margin-top: 3px; }
+.hidden { display: none !important; }
+.datefield {
+  width: 100%;
+  margin: 12px 0 16px;
+  padding: 13px;
+  border-radius: 12px;
+  border: 1px solid #8172b6;
+  background: white;
+  color: #20163d;
+  font-size: 16px;
+}
+.foods { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; margin: 17px 0; }
+.food {
+  border: 1px solid #71619e;
+  border-radius: 14px;
+  padding: 14px 7px;
+  background: #ffffff08;
+  color: white;
+  font-size: 14px;
+  font-weight: 700;
+}
+.food.selected { border: 2px solid var(--cyan); background: #5df6ff19; }
+.smalltag { font-size: 10px; letter-spacing: 2px; color: var(--cyan); font-weight: 800; margin: 4px 0 12px; }
+.error { font-size: 12px; color: #ffb7df; margin: 0 0 10px; }
+footer { font-size: 10px; letter-spacing: 1.2px; color: #a89ccf; margin-top: 18px; }
 </style>
 </head>
 <body>
 <main class="card">
-<div class="tag">PREGUNTA IMPORTANTE 💌</div>
-<div class="art" id="art">🐱🌹</div>
-<h1 id="title">¿Quieres salir<br><span>conmigo?</span></h1>
-<p id="message">Piénsalo bien... aunque, sinceramente, ya tengo muchas ganas de compartir un momento bonito contigo. 💗</p>
-<div id="choices">
-<button onclick="showInvitation()">Sí, obvio 💖</button>
-<button class="no" onclick="moveNo(this)">No 🙈</button>
-</div>
-<section id="invitation" class="hidden">
-<p><strong>¡Dijiste que sí! 🥹💗</strong><br>Entonces tenemos que elegir nuestro plan.</p>
-<div class="item"><div class="label">📅 EL DÍA</div><div class="value">Lo elegimos juntos</div></div>
-<div class="item"><div class="label">🍕 ALGO RICO</div><div class="value">Tú eliges qué se te antoja</div></div>
-<div class="item"><div class="label">🏍️ EL PLAN</div><div class="value">Paso por ti en la moto 💗</div></div>
-<p>Me basta con compartir ese momento contigo. 🌸</p>
-<button onclick="this.textContent='¡Tenemos una cita! 💞';this.disabled=true">Confirmo nuestra cita 💖</button>
-</section>
-<footer>HECHO CON 💗 PARA TI</footer>
+
+  <!-- PANTALLA 1: LA PREGUNTA -->
+  <section id="screen1">
+    <div class="tag">PREGUNTA IMPORTANTE 💌</div>
+    <div class="art">🐱🌹</div>
+    <h1>¿Quieres salir<br><span>conmigo?</span></h1>
+    <p>Piénsalo bien... aunque, sinceramente, ya tengo muchas ganas de compartir un momento bonito contigo. 💗</p>
+    <div class="buttons">
+      <button class="primary" onclick="go(2)">Sí, obvio 💖</button>
+      <button class="secondary" id="noBtn" type="button">No 🙈</button>
+    </div>
+  </section>
+
+  <!-- PANTALLA 2: LA SORPRESA -->
+  <section id="screen2" class="hidden">
+    <div class="tag">ESPERA, ESPERA... 💗</div>
+    <div class="art">🐱🌹</div>
+    <h1>¿Dijiste que <span>SÍ?</span> 🥹</h1>
+    <p>Procesando felicidad...</p>
+    <div class="progress"><span></span></div>
+    <p><strong>PROCESANDO FELICIDAD... 100% ✨</strong></p>
+    <button class="primary" onclick="go(3)">Sí, dije que sí 🥹 →</button>
+  </section>
+
+  <!-- PANTALLA 3: ELEGIR FECHA -->
+  <section id="screen3" class="hidden">
+    <div class="tag">PASO 1 DE 2</div>
+    <div class="art">🐱📅</div>
+    <h1>Elige el <span>día</span></h1>
+    <p>ELIGE BIEN O ME PONGO EXIGENTE 😼<br>Escoge la fecha que más te acomode.</p>
+    <input class="datefield" id="date" type="date" aria-label="Fecha de la cita">
+    <p id="dateError" class="error hidden">Elige una fecha para continuar.</p>
+    <button class="primary" onclick="nextToFood()">Siguiente →</button>
+  </section>
+
+  <!-- PANTALLA 4: ELEGIR COMIDA -->
+  <section id="screen4" class="hidden">
+    <div class="tag">PASO 2 DE 2</div>
+    <div class="art">🐱🍕</div>
+    <h1>¿Qué se te <span>antoja?</span></h1>
+    <p>Elige qué comemos ese día.</p>
+    <div class="foods">
+      <button class="food" data-food="Tacos 🌮" onclick="chooseFood(this)">🌮<br>Tacos</button>
+      <button class="food" data-food="Pizza 🍕" onclick="chooseFood(this)">🍕<br>Pizza</button>
+      <button class="food" data-food="Sushi 🍣" onclick="chooseFood(this)">🍣<br>Sushi</button>
+      <button class="food" data-food="Hamburguesas 🍔" onclick="chooseFood(this)">🍔<br>Hamburguesas</button>
+    </div>
+    <p id="foodError" class="error hidden">Elige una comida para continuar.</p>
+    <button class="primary" onclick="confirmDate()">Confirmar 💖</button>
+  </section>
+
+  <!-- PANTALLA 5: CONFIRMACIÓN -->
+  <section id="screen5" class="hidden">
+    <div class="tag">FOR YOU 💍🌸💗</div>
+    <div class="art">🏍️💗🌸</div>
+    <h1>¡Cita <span>confirmada!</span></h1>
+    <div class="smalltag">CONFIRMADO · CITA AGENDADA</div>
+    <p>Gracias por tu amor. Ya quiero que llegue ese día. 🥹</p>
+    <div class="details">
+      <div class="item"><div class="emoji">📅</div><div><div class="label">NUESTRO DÍA</div><div class="value" id="chosenDate">Fecha por elegir</div></div></div>
+      <div class="item"><div class="emoji">🍽️</div><div><div class="label">VAMOS A COMER</div><div class="value" id="chosenFood">Por elegir</div></div></div>
+      <div class="item"><div class="emoji">🏍️</div><div><div class="label">NUESTRO PLAN</div><div class="value">Paso por ti en la moto 🏍️💗</div></div></div>
+    </div>
+    <p><strong>Me basta con compartir ese momento contigo. 🌷</strong></p>
+    <button class="primary" onclick="sharePlan()">Compartir mi plan 💌</button>
+    <p id="shareNote" class="hidden">¡Listo! Haz una captura o escríbeme para coordinar la hora. 💗</p>
+    <button class="secondary" onclick="go(1)">Volver al inicio ↺</button>
+  </section>
+
+  <footer>HECHO CON 💗 PARA TI</footer>
 </main>
+
 <script>
-function showInvitation(){document.getElementById('choices').classList.add('hidden');document.getElementById('title').innerHTML='¡Sabía que dirías <span>que sí!</span>';document.getElementById('message').classList.add('hidden');document.getElementById('art').textContent='🐱💐';document.getElementById('invitation').classList.remove('hidden')}
-function moveNo(b){b.textContent='¿Segura? 🙈';b.style.transform='translateX('+(Math.random()>.5?1:-1)*45+'px)'}
+const screens = [1,2,3,4,5].map(n => document.getElementById('screen' + n));
+
+function go(n) {
+  screens.forEach((screen, i) => screen.classList.toggle('hidden', i !== n - 1));
+  window.scrollTo(0, 0);
+}
+
+const noBtn = document.getElementById('noBtn');
+
+function dodge(event) {
+  if (event) event.preventDefault();
+  noBtn.textContent = ['¿Segura? 🙈', 'Piénsalo otra vez 😹', 'Ese botón no se deja 😼'][Math.floor(Math.random() * 3)];
+  noBtn.style.transform = 'translate(' +
+    (Math.random() > 0.5 ? 1 : -1) * Math.floor(18 + Math.random() * 55) + 'px,' +
+    (Math.random() > 0.5 ? 1 : -1) * Math.floor(4 + Math.random() * 12) + 'px)';
+}
+
+noBtn.addEventListener('pointerenter', dodge);
+noBtn.addEventListener('pointerdown', dodge);
+noBtn.addEventListener('click', dodge);
+
+const dateInput = document.getElementById('date');
+const now = new Date();
+const localDate = new Date(now.getTime() - now.getTimezoneOffset() * 60000).toISOString().slice(0,10);
+dateInput.min = localDate;
+
+function nextToFood() {
+  if (!dateInput.value) {
+    document.getElementById('dateError').classList.remove('hidden');
+    return;
+  }
+  document.getElementById('dateError').classList.add('hidden');
+  go(4);
+}
+
+let food = '';
+
+function chooseFood(button) {
+  food = button.dataset.food;
+  document.querySelectorAll('.food').forEach(item => item.classList.toggle('selected', item === button));
+  document.getElementById('foodError').classList.add('hidden');
+}
+
+function confirmDate() {
+  if (!food) {
+    document.getElementById('foodError').classList.remove('hidden');
+    return;
+  }
+
+  const [year, month, day] = dateInput.value.split('-').map(Number);
+  const date = new Date(year, month - 1, day);
+
+  document.getElementById('chosenDate').textContent =
+    date.toLocaleDateString('es-EC', {weekday:'long', year:'numeric', month:'long', day:'numeric'});
+  document.getElementById('chosenFood').textContent = food;
+  go(5);
+}
+
+function sharePlan() {
+  document.getElementById('shareNote').classList.remove('hidden');
+
+  if (navigator.share) {
+    navigator.share({
+      title: 'Nuestra cita 💗',
+      text: '¡Tenemos una cita! 📅 ' + document.getElementById('chosenDate').textContent +
+        ' · Comemos: ' + food + ' · Paso por ti en la moto 🏍️💗'
+    }).catch(() => {});
+  }
+}
 </script>
 </body>
 </html>
