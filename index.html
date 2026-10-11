@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>¿Quieres salir conmigo? 💗</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;padding:18px;display:grid;place-items:center;background:radial-gradient(ellipse at top,#302064,#09071a 70%);font-family:system-ui,sans-serif;color:#fff8ff}
+.card{width:min(100%,470px);padding:26px 20px;border:1px solid #7962b7;border-radius:26px;background:#171235;box-shadow:0 0 35px #a34cff44;text-align:center}
+.tag{font-size:11px;letter-spacing:2.5px;color:#5df6ff;font-weight:800}
+.art{font-size:68px;margin:18px}
+h1{font-size:36px;line-height:1.1}h1 span{color:#ff69c9}
+p{font-size:15px;line-height:1.65;color:#e4ddff}
+button{width:100%;padding:15px;border:0;border-radius:30px;background:linear-gradient(90deg,#5df6ff,#ff9cde);font-weight:bold;font-size:16px;margin-top:12px;color:#180b2a}
+.no{background:#ffffff12;border:1px solid #71619e;color:white}
+.item{text-align:left;border:1px solid #5a4a92;border-radius:14px;padding:14px;margin:10px 0;background:#ffffff08}
+.label{font-size:10px;letter-spacing:2px;color:#5df6ff;font-weight:bold}.value{margin-top:4px;font-weight:650}
+.hidden{display:none}footer{margin-top:20px;color:#c5b6ec;font-size:12px}
+</style>
+</head>
+<body>
+<main class="card">
+<div class="tag">PREGUNTA IMPORTANTE 💌</div>
+<div class="art" id="art">🐱🌹</div>
+<h1 id="title">¿Quieres salir<br><span>conmigo?</span></h1>
+<p id="message">Piénsalo bien... aunque, sinceramente, ya tengo muchas ganas de compartir un momento bonito contigo. 💗</p>
+<div id="choices">
+<button onclick="showInvitation()">Sí, obvio 💖</button>
+<button class="no" onclick="moveNo(this)">No 🙈</button>
+</div>
+<section id="invitation" class="hidden">
+<p><strong>¡Dijiste que sí! 🥹💗</strong><br>Entonces tenemos que elegir nuestro plan.</p>
+<div class="item"><div class="label">📅 EL DÍA</div><div class="value">Lo elegimos juntos</div></div>
+<div class="item"><div class="label">🍕 ALGO RICO</div><div class="value">Tú eliges qué se te antoja</div></div>
+<div class="item"><div class="label">🏍️ EL PLAN</div><div class="value">Paso por ti en la moto 💗</div></div>
+<p>Me basta con compartir ese momento contigo. 🌸</p>
+<button onclick="this.textContent='¡Tenemos una cita! 💞';this.disabled=true">Confirmo nuestra cita 💖</button>
+</section>
+<footer>HECHO CON 💗 PARA TI</footer>
+</main>
+<script>
+function showInvitation(){document.getElementById('choices').classList.add('hidden');document.getElementById('title').innerHTML='¡Sabía que dirías <span>que sí!</span>';document.getElementById('message').classList.add('hidden');document.getElementById('art').textContent='🐱💐';document.getElementById('invitation').classList.remove('hidden')}
+function moveNo(b){b.textContent='¿Segura? 🙈';b.style.transform='translateX('+(Math.random()>.5?1:-1)*45+'px)'}
+</script>
+</body>
+</html>
